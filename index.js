@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-
 // Server
 const express = require('express');
 const cors = require('cors');
@@ -20,7 +19,7 @@ app.get('/', (req, res) => {
     order: [
       ['id', 'DESC']
     ],
-    attributes: ['id','title', 'rating']
+    attributes: ['id','title', 'rating', 'genre', 'year', 'actors']
   })
   .then((results) => {
     res.status(200);
@@ -34,9 +33,16 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   let title = req.body.title;
   let rating = req.body.rating;
+  let genre = req.body.genre;
+  let year = req.body.year;
+  let actors = req.body.actors;
+
   Movie.create({
     title: title,
-    rating: rating
+    rating: rating,
+    genre: genre,
+    year: year,
+    actors: actors
   })
   .then((movie) => {
     res.status(200);
@@ -93,7 +99,7 @@ sequelize
 const Movie = sequelize.import(__dirname + '/models/movie');
 
 // DB Sync
-sequelize.sync()
+sequelize.sync({force: true})
   .then(() => {
     console.log('Sync success');
   })
