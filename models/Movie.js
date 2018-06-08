@@ -7,5 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     title: DataTypes.STRING,
     rating: DataTypes.INTEGER,
+    genre: DataTypes.STRING,
+    actors: DataTypes.ARRAY(DataTypes.STRING),
+    year: DataTypes.INTEGER
   })
 }

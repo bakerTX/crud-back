@@ -19,7 +19,8 @@ app.get('/', (req, res) => {
   Movie.findAll({
     order: [
       ['id', 'DESC']
-    ]
+    ],
+    attributes: ['id','title', 'rating']
   })
   .then((results) => {
     res.status(200);
